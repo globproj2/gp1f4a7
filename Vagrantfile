@@ -1,21 +1,18 @@
 Vagrant.configure("2") do |config|
   config.vm.box = "debian/bullseye64"
-  config.vm.hostname = "gp1f4a7.fjeclot.net"
+  config.vm.hostname = "gp1f4a7blue.fjeclot.net"
   config.vm.provider "virtualbox" do |v|
     # v.gui = true
-    v.name = "gp1f4a7_dacomo"
+    v.name = "gp1f4a7blue"
     v.memory = 2048
     v.cpus = 2
     v.customize ['modifyvm', :id, '--clipboard', 'bidirectional', '--groups', '/ASIX2']     
   end
   
   config.vm.network "public_network"
-  
-  config.vm.network "forwarded_port", guest: 80, host: 8080
-    
+       
   config.vm.synced_folder "../codi", "/home/vagrant/gp1f4a7/codi"
-  #config.vm.synced_folder "../dockerfiles", "/home/vagrant/gp1f4a7/dockerfiles"
-  
+    
   config.vm.provision "shell", inline: <<-SHELL
     sudo apt-get update -y
     sudo apt-get install -y aptitude
